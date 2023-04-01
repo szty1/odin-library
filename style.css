@@ -82,7 +82,7 @@ div.books {
   background-color: #eeeeee;
   padding: 20px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(400px, auto));
   grid-auto-rows: 200px;
   gap: 20px;
 }
@@ -91,6 +91,51 @@ div.book {
   background-color: #fefefe;
   padding: 20px;
   border-radius: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto auto 1fr;
+  gap: 0px;
+}
+
+div.book p {
+  margin: 0;
+}
+
+div.book p.author {
+  font-weight: 500;
+  font-size: 20px;
+  grid-column: 1 / 3;
+}
+
+div.book p.title {
+  font-weight: 500;
+  font-size: 24px;
+  grid-column: 1 / 3;
+}
+
+div.book p.pages {
+  grid-column: 1 / 3;
+}
+
+div.book a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 15px;
+  border-radius: 10px;
+  justify-self: stretch;
+  align-self:last baseline;
+  text-align: center;
+}
+
+div.book a.read {
+  background-color: #084fe9;
+  margin-right: 5px;
+}
+
+div.book a.delete {
+  background-color: #e71414;
+  margin-left: 5px;
 }
 
 div.footer {

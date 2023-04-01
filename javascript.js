@@ -22,8 +22,8 @@ function listBooks() {
       <p class="author">${book.author}</p>
       <p class="title">${book.title}</p>
       <p class="pages">Contains ${book.pageCount} pages</p>
-      <a href="#">Mark as read</a>
-      <a href="#">Delete item</a>
+      <a href="#" class="read">Mark as read</a>
+      <a href="#" class="delete">Delete item</a>
     </div>`;
     bookscontainer.innerHTML += html;
   }); 
