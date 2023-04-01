@@ -88,13 +88,21 @@ div.books {
 }
 
 div.book {
-  background-color: #fefefe;
   padding: 20px;
   border-radius: 10px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto auto 1fr;
   gap: 0px;
+}
+
+div.read {
+  background-color: #fefefe;
+}
+
+div.unread {
+  background-color: #acacac;
+  color: #ffffff;
 }
 
 div.book p {
@@ -128,8 +136,13 @@ div.book a {
   text-align: center;
 }
 
-div.book a.read {
-  background-color: #084fe9;
+div.read a.read {
+  background-color: #acacac;
+  margin-right: 5px;
+}
+
+div.unread a.read {
+  background-color: #12970d;
   margin-right: 5px;
 }
 
