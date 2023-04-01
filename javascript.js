@@ -14,12 +14,20 @@ function Book(title, author, pages, read) {
 function addBookToLibrary(title, author, pages, read) {
   const newBook = new Book(title, author, pages, read);
   myLibrary.push(newBook);
-  listBooks();
 }
 
 function listBooks() {
-
-}
+  myLibrary.forEach( book => {
+    let html = `<div class="book ${book.read ? 'read' : 'unread'}">
+      <p class="author">${book.author}</p>
+      <p class="title">${book.title}</p>
+      <p class="pages">Contains ${book.pageCount} pages</p>
+      <a href="#">Mark as read</a>
+      <a href="#">Delete item</a>
+    </div>`;
+    bookscontainer.innerHTML += html;
+  }); 
+};
 
 function openAddNewForm() {
   console.log(this.e);
@@ -35,6 +43,7 @@ function validateInput() {
 }
 
 const modal = document.querySelector('div.modal');
+const bookscontainer = document.querySelector('div.books');
 
 const form = document.querySelector('div.add form');
 form.addEventListener('submit', validateInput);
@@ -47,3 +56,6 @@ modalclose.addEventListener('click', closeAddNewForm);
 
 addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', '295', false);
 addBookToLibrary('Lord of the Rings', 'J.R.R. Tolkien', '910', true);
+
+
+listBooks();
