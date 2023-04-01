@@ -114,10 +114,13 @@ div.add {
   align-items: center;
 }
 
+div.add a{
+  justify-self: right;
+}
+
 div.add svg {
   width: 32px;
   height: 32px;
-  justify-self: right;
 }
 
 div.add form {
