@@ -1,0 +1,94 @@
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 300;
+  display: flex;
+}
+
+div.content {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 20px;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  padding: 0;
+}
+
+div.header {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 20px;
+  align-items: center;
+}
+
+div.title {
+  justify-self: left;
+}
+
+div.header a {
+  justify-self: right;
+  margin: 10px 0;
+  border-radius: 10px;
+  background-color: #084fe9;
+  padding: 20px;
+  font-weight: 900;
+  color: #ffffff;
+}
+
+div.add {
+  
+}
+
+div.add form {
+  display: none;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 20px;
+  align-items: center;
+}
+
+
+
+form label {
+  justify-self: right;
+}
+
+form input,
+form select {
+  width: 300px;
+  padding: 5px;
+  font-size: 16px;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 300;
+}
+
+form select {
+  width: 315px;
+}
+
+form button {
+  grid-column: 2 / 3;
+  width: 200px;
+  padding: 10px;
+}
+
+div.books {
+  flex: 1 1 100px;
+  border-radius: 10px;
+  background-color: #eeeeee;
+  padding: 20px;
+}
+
+div.footer {
+  font-size: 14px;
+  text-align: center;
+}
