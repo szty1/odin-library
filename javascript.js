@@ -9,22 +9,24 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
-
+// Library functions
 
 function addBookToLibrary(title, author, pages, read) {
   const newBook = new Book(title, author, pages, read);
   myLibrary.push(newBook);
 }
 
-function toggleReadStatus() {
+function deleteBookfromLibrary() {
+  myLibrary.splice(this.dataset.index, 1);
+  listBooks();
+}
+
+function toggleReadStatusOfBook() {
   myLibrary[this.dataset.index].read = !myLibrary[this.dataset.index].read;
   listBooks();
 }
 
-function deleteBook() {
-  myLibrary.splice(this.dataset.index, 1);
-  listBooks();
-}
+// Display functions
 
 function listBooks() {
   bookscontainer.innerHTML = '';
@@ -41,10 +43,10 @@ function listBooks() {
   }); 
 
   const readbuttons = document.querySelectorAll('div.book a.read');
-  readbuttons.forEach((button) => button.addEventListener('click', toggleReadStatus));
+  readbuttons.forEach((button) => button.addEventListener('click', toggleReadStatusOfBook));
 
   const deletebuttons = document.querySelectorAll('div.book a.delete');
-  deletebuttons.forEach((button) => button.addEventListener('click', deleteBook));
+  deletebuttons.forEach((button) => button.addEventListener('click', deleteBookfromLibrary));
 };
 
 function openAddNewForm() {
@@ -54,6 +56,8 @@ function openAddNewForm() {
 function closeAddNewForm() {
   modal.style.display = "none";
 }
+
+// Form handling
 
 function validateForm(e) {
   e.preventDefault();
@@ -106,26 +110,28 @@ function clearErrorMessages() {
   });
 }
 
+// HTML elements and listeners
+
 const modal = document.querySelector('div.modal');
 const bookscontainer = document.querySelector('div.books');
-
 const form = document.querySelector('div.add form');
-form.addEventListener('submit', validateForm);
-
 const inputFields = document.querySelectorAll('.modal input');
-inputFields.forEach((input) => {
-  input.errormessage = document.querySelector(`#${input.id} + p.errormessage`);
-});
-
 const addnewlink = document.querySelector('div.header a');
-addnewlink.addEventListener('click', openAddNewForm);
-
 const modalclose = document.querySelector('div.modal a.closebutton');
+
+// Event listeners
+
+form.addEventListener('submit', validateForm);
+inputFields.forEach((input) => input.errormessage = document.querySelector(`#${input.id} + p.errormessage`);
+addnewlink.addEventListener('click', openAddNewForm);
 modalclose.addEventListener('click', closeAddNewForm);
 
+// Add Test Data
 
 addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', '295', false);
 addBookToLibrary('Lord of the Rings', 'J.R.R. Tolkien', '910', true);
 addBookToLibrary('Catch 22', 'Joseph Heller', '405', false);
+
+// Init
 
 listBooks();
