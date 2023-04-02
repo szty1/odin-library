@@ -1,3 +1,5 @@
+// Data Structures
+
 let myLibrary = [];
 
 function Book(title, author, pages, read) {
@@ -5,11 +7,9 @@ function Book(title, author, pages, read) {
   this.author = author;
   this.pageCount = pages;
   this.read = read;
-
-  this.info = function() {
-    return `${this.title} by ${this.author}, ${this.pageCount} pages, ${this.read ? 'read' : 'not read yet'}`;
-  }
 }
+
+
 
 function addBookToLibrary(title, author, pages, read) {
   const newBook = new Book(title, author, pages, read);
@@ -48,7 +48,6 @@ function listBooks() {
 };
 
 function openAddNewForm() {
-  console.log(this.e);
   modal.style.display = "flex";
 }
 
@@ -56,15 +55,67 @@ function closeAddNewForm() {
   modal.style.display = "none";
 }
 
-function validateInput() {
+function validateForm(e) {
+  e.preventDefault();
+  let formValid = true;
+  inputFields.forEach((input) => {
+    if (!input.validity.valid) {
+      displayError(input);
+      formValid = false;
+    }
+  });
+  if (formValid) {
+    let formData = new FormData(e.target);
+    addBookToLibrary(formData.get('title'), formData.get('author'), formData.get('pageCount'), formData.get('read'));
+    form.reset();
+    clearErrorMessages() 
+    closeAddNewForm();
+    listBooks();
+  }
+}
 
+function displayError(input) {
+  if (input.validity.valueMissing) {
+    switch (input.id) {
+      case 'author':
+        input.errormessage.textContent = 'Please enter the author!';
+        break;
+      case 'title':
+        input.errormessage.textContent = 'Please enter the book title!';
+        break;
+      case 'pageCount':
+        input.errormessage.textContent = 'Please enter the page count!';
+        break;
+    }
+  } else if (input.validity.patternMismatch) {
+    switch (input.id) {
+      case 'pageCount':
+        input.errormessage.textContent = "Please enter only numbers here!";
+        break;
+    }
+  }
+  input.errormessage.className = 'errormessage active';
+  input.className = 'error';
+}
+
+function clearErrorMessages() {
+  inputFields.forEach((input) => {
+    input.errormessage.textContent = '';
+    input.errormessage.className = 'errormessage';
+    input.className = '';
+  });
 }
 
 const modal = document.querySelector('div.modal');
 const bookscontainer = document.querySelector('div.books');
 
 const form = document.querySelector('div.add form');
-form.addEventListener('submit', validateInput);
+form.addEventListener('submit', validateForm);
+
+const inputFields = document.querySelectorAll('.modal input');
+inputFields.forEach((input) => {
+  input.errormessage = document.querySelector(`#${input.id} + p.errormessage`);
+});
 
 const addnewlink = document.querySelector('div.header a');
 addnewlink.addEventListener('click', openAddNewForm);
@@ -73,8 +124,8 @@ const modalclose = document.querySelector('div.modal a.closebutton');
 modalclose.addEventListener('click', closeAddNewForm);
 
 
-
 addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', '295', false);
 addBookToLibrary('Lord of the Rings', 'J.R.R. Tolkien', '910', true);
+addBookToLibrary('Catch 22', 'Joseph Heller', '405', false);
 
 listBooks();

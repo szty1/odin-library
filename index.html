@@ -33,15 +33,30 @@
       <a href="#" class="closebutton">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M320 320L192 192M192 320l128-128"/></svg>
       </a>
-      <form action="#" method="get">
-        <label for="author">Author: </label><input type="text" name="" id="author">
-        <label for="title">Title: </label><input type="text" name="" id="title">
-        <label for="pageCount">Number of Pages: </label><input type="text" name="" id="pageCount">
-        <label for="read">Have you read this book?</label>
-        <select name="" id="read">
-          <option value="">Not yet.</option>
-          <option value="">Yes, I have read it.</option>
-        </select>
+      <form action="#" method="get" novalidate>
+        <div>
+          <label for="author">* Author: </label>
+          <input type="text" name="author" id="author" required>
+          <p class="errormessage"> </p>
+        </div>
+        <div>
+          <label for="title">* Title: </label>
+          <input type="text" name="title" id="title" required>
+          <p class="errormessage"> </p>
+        </div>
+        <div>
+          <label for="pageCount">* Number of Pages: </label>
+          <input type="text" name="pageCount" id="pageCount" pattern="[0-9]+" required>
+          <p class="errormessage"> </p>
+        </div>
+        <div>
+          <label for="read">Have you read this book?</label>
+          <select name="read" id="read">
+            <option value="">Not yet.</option>
+            <option value="">Yes, I have read it.</option>
+          </select>
+          <p class="errormessage"> </p>
+        </div>
         <button type="submit">Add Book</button>
       </form>
     </div>
