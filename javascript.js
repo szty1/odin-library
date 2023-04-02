@@ -1,6 +1,12 @@
 // Data Structures
 
-let myLibrary = [];
+let myLibrary;
+
+const INIT_DATA = [
+  { title: 'The Hobbit', author: 'J.R.R. Tolkien', pageCount:'295', read: false },
+  { title: 'Lord of the Rings', author: 'J.R.R. Tolkien', pageCount: '910', read: true},
+  { title: 'Catch 22', author: 'Joseph Heller', pageCount: '405', read: true},
+];
 
 function Book(title, author, pages, read) {
   this.title = title;
@@ -26,7 +32,7 @@ function toggleReadStatusOfBook() {
   listBooks();
 }
 
-// Display functions
+// Render functions
 
 function listBooks() {
   bookscontainer.innerHTML = '';
@@ -55,27 +61,6 @@ function openAddNewForm() {
 
 function closeAddNewForm() {
   modal.style.display = "none";
-}
-
-// Form handling
-
-function validateForm(e) {
-  e.preventDefault();
-  let formValid = true;
-  inputFields.forEach((input) => {
-    if (!input.validity.valid) {
-      displayError(input);
-      formValid = false;
-    }
-  });
-  if (formValid) {
-    let formData = new FormData(e.target);
-    addBookToLibrary(formData.get('title'), formData.get('author'), formData.get('pageCount'), formData.get('read'));
-    form.reset();
-    clearErrorMessages() 
-    closeAddNewForm();
-    listBooks();
-  }
 }
 
 function displayError(input) {
@@ -110,7 +95,28 @@ function clearErrorMessages() {
   });
 }
 
-// HTML elements and listeners
+// Form handling
+
+function validateForm(e) {
+  e.preventDefault();
+  let formValid = true;
+  inputFields.forEach((input) => {
+    if (!input.validity.valid) {
+      displayError(input);
+      formValid = false;
+    }
+  });
+  if (formValid) {
+    let formData = new FormData(e.target);
+    addBookToLibrary(formData.get('title'), formData.get('author'), formData.get('pageCount'), formData.get('read'));
+    form.reset();
+    clearErrorMessages() 
+    closeAddNewForm();
+    listBooks();
+  }
+}
+
+// HTML elements
 
 const modal = document.querySelector('div.modal');
 const bookscontainer = document.querySelector('div.books');
@@ -122,15 +128,15 @@ const modalclose = document.querySelector('div.modal a.closebutton');
 // Event listeners
 
 form.addEventListener('submit', validateForm);
-inputFields.forEach((input) => input.errormessage = document.querySelector(`#${input.id} + p.errormessage`);
+inputFields.forEach((input) => {
+  input.errormessage = document.querySelector(`#${input.id} + p.errormessage`);
+});
 addnewlink.addEventListener('click', openAddNewForm);
 modalclose.addEventListener('click', closeAddNewForm);
 
 // Add Test Data
 
-addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', '295', false);
-addBookToLibrary('Lord of the Rings', 'J.R.R. Tolkien', '910', true);
-addBookToLibrary('Catch 22', 'Joseph Heller', '405', false);
+myLibrary = INIT_DATA;
 
 // Init
 
