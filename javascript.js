@@ -1,6 +1,33 @@
 // Data Structures
 
-let myLibrary;
+class Library {
+  constructor() {
+    this.books = [];
+  }
+
+  addBook(book) {
+    this.books.push(book);
+  }
+
+  deleteBook(index) {
+    this.books.splice(index, 1);
+  }
+}
+
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
+
+  toggleRead() {
+    this.read = !this.read;
+  }
+}
+
+const myLibrary = new Library();
 
 const INIT_DATA = [
   { title: 'The Hobbit', author: 'J.R.R. Tolkien', pageCount:'295', read: false },
@@ -8,27 +35,20 @@ const INIT_DATA = [
   { title: 'Catch 22', author: 'Joseph Heller', pageCount: '405', read: true},
 ];
 
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pageCount = pages;
-  this.read = read;
-}
-
 // Library functions
 
 function addBookToLibrary(title, author, pages, read) {
-  const newBook = new Book(title, author, pages, read);
-  myLibrary.push(newBook);
+  myLibrary.addBook(new Book(title, author, pages, read));
+  listBooks();
 }
 
 function deleteBookfromLibrary() {
-  myLibrary.splice(this.dataset.index, 1);
+  myLibrary.deleteBook(this.dataset.index);
   listBooks();
 }
 
 function toggleReadStatusOfBook() {
-  myLibrary[this.dataset.index].read = !myLibrary[this.dataset.index].read;
+  myLibrary.books[this.dataset.index].toggleRead();
   listBooks();
 }
 
@@ -37,7 +57,7 @@ function toggleReadStatusOfBook() {
 function listBooks() {
   bookscontainer.innerHTML = '';
 
-  myLibrary.forEach( (book, index) => {
+  myLibrary.books.forEach( (book, index) => {
     let html = `<div class="book ${book.read ? 'read' : 'unread'}">
       <p class="author">${book.author}</p>
       <p class="title">${book.title}</p>
@@ -136,7 +156,9 @@ modalclose.addEventListener('click', closeAddNewForm);
 
 // Add Test Data
 
-myLibrary = INIT_DATA;
+INIT_DATA.forEach((book) => {
+  myLibrary.addBook(new Book(book.title, book.author, book.pages, book.read));
+});
 
 // Init
 
