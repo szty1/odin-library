@@ -27,15 +27,7 @@ class Book {
   }
 }
 
-const myLibrary = new Library();
-
-const INIT_DATA = [
-  { title: 'The Hobbit', author: 'J.R.R. Tolkien', pageCount:'295', read: false },
-  { title: 'Lord of the Rings', author: 'J.R.R. Tolkien', pageCount: '910', read: true},
-  { title: 'Catch 22', author: 'Joseph Heller', pageCount: '405', read: true},
-];
-
-// Library functions
+// Event handlers
 
 function addBookToLibrary(title, author, pages, read) {
   myLibrary.addBook(new Book(title, author, pages, read));
@@ -115,7 +107,7 @@ function clearErrorMessages() {
   });
 }
 
-// Form handling
+// Form validation
 
 function validateForm(e) {
   e.preventDefault();
@@ -154,12 +146,20 @@ inputFields.forEach((input) => {
 addnewlink.addEventListener('click', openAddNewForm);
 modalclose.addEventListener('click', closeAddNewForm);
 
+// Init
+
+const myLibrary = new Library();
+
 // Add Test Data
+
+const INIT_DATA = [
+  { title: 'The Hobbit', author: 'J.R.R. Tolkien', pageCount:'295', read: false },
+  { title: 'Lord of the Rings', author: 'J.R.R. Tolkien', pageCount: '910', read: true},
+  { title: 'Catch 22', author: 'Joseph Heller', pageCount: '405', read: true},
+];
 
 INIT_DATA.forEach((book) => {
   myLibrary.addBook(new Book(book.title, book.author, book.pages, book.read));
 });
-
-// Init
 
 listBooks();
